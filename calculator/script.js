@@ -7,37 +7,41 @@ let result = document.getElementById("result");
 for(let i = 0; i < numbers.length; i++) {
   let number = numbers[i];
 
-  number.addEventListener('click', numberPress)
+  number.addEventListener('click', function(e) {
+    numberPress(e.target.textContent);
+  });
 }
 
 for(let i = 0; i < operations.length; i++) {
   let operationBtn = operations[i];
 
-  operationBtn.addEventListener('click', operation)
+  operationBtn.addEventListener('click', function(e) {
+    operation(e.target.textContent);
+  });
 }
 
 for(let i = 0; i < clearBtns.length; i++) {
   let clearBtn = clearBtns[i];
   clearBtn.addEventListener('click', function(e) {
-    console.log(`клик по кнопке с операцией ce или с`);
+    clear(e.srcElement.id)
   });
 }
 
 decimalBtn.addEventListener('click', decimal);
 
 
-function numberPress() {
-  console.log(`клик по кнопке с номером`);
+function numberPress(num) {
+  console.log(`клик по кнопке с номером ${num}`);
 };
 
-function operation() {
-  console.log(`клик по кнопке с операцией`);
+function operation(symbol) {
+  console.log(`клик по кнопке с операцией ${symbol}`);
 };
 
 function decimal() {
   console.log(`клик по кнопке с операцией точка`);
 };
 
-function clear() {
-  console.log(`клик по кнопке с операцией ce или с`);
+function clear(id) {
+  console.log(`клик по кнопке с операцией ${id}`);
 };
