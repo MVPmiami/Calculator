@@ -73,7 +73,7 @@ function operation(op) {
 
 function decimal() {
   let LocalDecimalMemory = display.value;
-
+  
   if(MemoryNewNumber) {
     LocalDecimalMemory = '0.';
     MemoryNewNumber = false;
