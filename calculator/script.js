@@ -57,12 +57,14 @@ function operation(op) {
     if(MemoryPendingOperation === '+') {
       MemoryCurrentNumber += parseFloat(localOperationMemory);
     }else if(MemoryPendingOperation === '-') {
-      MemoryCurrentNumber -= parseFloat(localOperationMemory);;
+      MemoryCurrentNumber -= parseFloat(localOperationMemory);
     }
     else if(MemoryPendingOperation === '*') {
-      MemoryCurrentNumber *= parseFloat(localOperationMemory);;
+      MemoryCurrentNumber *= parseFloat(localOperationMemory);
     }else if(MemoryPendingOperation === '/') {
-      MemoryCurrentNumber /= parseFloat(localOperationMemory);;
+      MemoryCurrentNumber /= parseFloat(localOperationMemory);
+    }else if(MemoryPendingOperation === 'yx') {
+      MemoryCurrentNumber = Math.pow(parseFloat(localOperationMemory), parseFloat(MemoryCurrentNumber));
     }else {
       MemoryCurrentNumber = parseFloat(localOperationMemory);
     }
@@ -73,7 +75,7 @@ function operation(op) {
 
 function decimal() {
   let LocalDecimalMemory = display.value;
-  
+
   if(MemoryNewNumber) {
     LocalDecimalMemory = '0.';
     MemoryNewNumber = false;
