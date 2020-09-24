@@ -1,9 +1,9 @@
-let numbers = document.querySelectorAll(".number");
-let operations = document.querySelectorAll(".operator");
-let decimalBtn = document.getElementById("decimal");
-let clearBtns = document.querySelectorAll(".clear-btn");
-let result = document.getElementById("result");
-let display = document.getElementById("display");
+const numbers = document.querySelectorAll(".number");
+const operations = document.querySelectorAll(".operator");
+const decimalBtn = document.getElementById("decimal");
+const clearBtns = document.querySelectorAll(".clear-btn");
+const result = document.getElementById("result");
+const display = document.getElementById("display");
 let MemoryCurrentNumber = 0;
 let MemoryNewNumber = false;
 let MemoryPendingOperation = '';
@@ -64,7 +64,9 @@ function operation(op) {
     }else if(MemoryPendingOperation === '/') {
       MemoryCurrentNumber /= parseFloat(localOperationMemory);
     }else if(MemoryPendingOperation === 'yx') {
-      MemoryCurrentNumber = Math.pow(parseFloat(localOperationMemory), parseFloat(MemoryCurrentNumber));
+      MemoryCurrentNumber = Math.pow(+MemoryCurrentNumber, +localOperationMemory);
+    }else if(MemoryPendingOperation === '√') {
+      MemoryCurrentNumber = Math.pow(parseFloat(localOperationMemory), 1/2);
     }else {
       MemoryCurrentNumber = parseFloat(localOperationMemory);
     }
@@ -93,7 +95,7 @@ function clear(id) {
     MemoryNewNumber = true;
   }else if(id === 'c') {
     display.value = '0';
-    MemoryNewNumber = true;
+    MemoryNewNumber = false;
     MemoryCurrentNumber = 0;
     MemoryPendingOperation = '';
   }
