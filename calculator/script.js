@@ -49,6 +49,14 @@ function numberPress(num) {
 
 function operation(op) {
   let localOperationMemory = display.value;
+  let unarMinus = '-';
+
+  if(display.value === '0' && op === '-'){
+    unarMinus = '-'
+    MemoryCurrentNumber = unarMinus;
+  }
+
+  if(display.value !== '0' )
 
   if(op === '√') {
     MemoryCurrentNumber = Math.pow(parseFloat(localOperationMemory), 1/2);
@@ -73,7 +81,7 @@ function operation(op) {
     }else {
       MemoryCurrentNumber = parseFloat(localOperationMemory);
     }
-    display.value = MemoryCurrentNumber;
+    display.value = MemoryCurrentNumber.toFixed(4);
     MemoryPendingOperation = op;
   }
 };
