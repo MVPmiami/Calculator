@@ -50,6 +50,11 @@ function numberPress(num) {
 function operation(op) {
   let localOperationMemory = display.value;
 
+  if(op === '√') {
+    MemoryCurrentNumber = Math.pow(parseFloat(localOperationMemory), 1/2);
+     return display.value = MemoryCurrentNumber;
+  }
+
   if(MemoryNewNumber && MemoryPendingOperation !== '=') {
     display.value = MemoryCurrentNumber;
   }else {
@@ -65,8 +70,6 @@ function operation(op) {
       MemoryCurrentNumber /= parseFloat(localOperationMemory);
     }else if(MemoryPendingOperation === 'yx') {
       MemoryCurrentNumber = Math.pow(+MemoryCurrentNumber, +localOperationMemory);
-    }else if(MemoryPendingOperation === '√') {
-      MemoryCurrentNumber = Math.pow(parseFloat(localOperationMemory), 1/2);
     }else {
       MemoryCurrentNumber = parseFloat(localOperationMemory);
     }
