@@ -7,6 +7,7 @@ const display = document.getElementById("display");
 let MemoryCurrentNumber = 0;
 let MemoryNewNumber = false;
 let MemoryPendingOperation = '';
+const fixMath = 100000000;
 
 for(let i = 0; i < numbers.length; i++) {
   let number = numbers[i];
@@ -52,7 +53,6 @@ function operation(op) {
   let unarMinus = '-';
 
   if(display.value === '0' && op === '-'){
-    unarMinus = '-'
     MemoryCurrentNumber = unarMinus;
   }
 
@@ -60,7 +60,10 @@ function operation(op) {
 
   if(op === '√') {
     MemoryCurrentNumber = Math.pow(parseFloat(localOperationMemory), 1/2);
-     return display.value = MemoryCurrentNumber;
+    if(isNaN(MemoryCurrentNumber)){
+      return display.value = 'Error';
+    }
+    return display.value = MemoryCurrentNumber;
   }
 
   if(MemoryNewNumber && MemoryPendingOperation !== '=') {
@@ -68,9 +71,9 @@ function operation(op) {
   }else {
     MemoryNewNumber = true;
     if(MemoryPendingOperation === '+') {
-      MemoryCurrentNumber += parseFloat(localOperationMemory);
+      MemoryCurrentNumber = (MemoryCurrentNumber * fixMath + parseFloat(localOperationMemory) * fixMath) / fixMath;
     }else if(MemoryPendingOperation === '-') {
-      MemoryCurrentNumber -= parseFloat(localOperationMemory);
+      MemoryCurrentNumber = (MemoryCurrentNumber * fixMath - parseFloat(localOperationMemory) * fixMath) / fixMath;
     }
     else if(MemoryPendingOperation === '*') {
       MemoryCurrentNumber *= parseFloat(localOperationMemory);
@@ -81,7 +84,7 @@ function operation(op) {
     }else {
       MemoryCurrentNumber = parseFloat(localOperationMemory);
     }
-    display.value = MemoryCurrentNumber.toFixed(4);
+    display.value = MemoryCurrentNumber;
     MemoryPendingOperation = op;
   }
 };
