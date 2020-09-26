@@ -54,6 +54,11 @@ function operation(op) {
   if(localOperationMemory === '0' && op === '-'){
     return display.value = '-';
   }
+  
+  if (MemoryPendingOperation && op === '-') {
+    MemoryNewNumber = false;
+    return display.value = '-';
+  }
 
   if(op === '√') {
     MemoryCurrentNumber = Math.pow(parseFloat(localOperationMemory), 1/2);
