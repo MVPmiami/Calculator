@@ -7,7 +7,7 @@ const display = document.getElementById("display");
 let MemoryCurrentNumber = 0;
 let MemoryNewNumber = false;
 let MemoryPendingOperation = '';
-const fixMath = 100000000;
+const fixMath = 1e12;
 
 for(let i = 0; i < numbers.length; i++) {
   let number = numbers[i];
@@ -50,13 +50,10 @@ function numberPress(num) {
 
 function operation(op) {
   let localOperationMemory = display.value;
-  let unarMinus = '-';
 
-  if(display.value === '0' && op === '-'){
-    MemoryCurrentNumber = unarMinus;
+  if(localOperationMemory === '0' && op === '-'){
+    return display.value = '-';
   }
-
-  if(display.value !== '0' )
 
   if(op === '√') {
     MemoryCurrentNumber = Math.pow(parseFloat(localOperationMemory), 1/2);
